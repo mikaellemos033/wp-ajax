@@ -34,7 +34,7 @@ class LoadPosts
 
 		return Response::json([
 			'success' => true,
-			'message' => 'Posts carregados com sucesso',
+			'message' => 'Posts carregados com sucesso!',
 			'posts'   => $publish
 		]);
 	}
@@ -48,7 +48,7 @@ class LoadPosts
 	{
 		return Response::json([
 			'failed'  => true,
-			'message' => 'Nada encontrado'
+			'message' => 'Nada encontrado!'
 		], 404);
 	}
 
