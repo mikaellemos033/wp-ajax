@@ -5,7 +5,7 @@
 
 ```
 $.ajax({
-    url: base_url + '',
+    url: base_url + '/load-posts-json',
     method: 'GET',
     success: function(data){
         var response = JSON.parse(data);
