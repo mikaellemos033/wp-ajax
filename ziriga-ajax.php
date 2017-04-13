@@ -19,8 +19,9 @@ add_action('init', 'zirigaBootstrap');
 function zirigaBootstrap(){
 
 	$url = trim(parse_url(add_query_arg(array()), PHP_URL_PATH), '/');
+	$url = explode('/', $url);
 
-	if ($url === AJAX_ZIRIGA_URL){
+	if (end($url) === AJAX_ZIRIGA_URL){
 		Ziriga\Bootstrap::run();
 	}
 }
