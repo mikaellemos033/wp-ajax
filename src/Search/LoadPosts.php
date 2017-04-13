@@ -32,7 +32,11 @@ class LoadPosts
 			array_push($publish, $post);
 		}
 
-		return Response::json($publish);
+		return Response::json([
+			'success' => true,
+			'message' => 'Posts carregados com sucesso',
+			'posts'   => $publish
+		]);
 	}
 
 	public static function loadMeta($id, $meta, $single = false)
