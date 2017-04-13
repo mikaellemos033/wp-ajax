@@ -13,8 +13,8 @@ class Bootstrap
 
 	protected static function getParams()
 	{
-		$request = array_map('addslashes', filter_input_array(INPUT_GET, FILTER_DEFAULT));
-		$request = !$request ? [] : $request;
+		$request = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+		$request = !$request ? [] : array_map('addslashes', $request);
 
 		return array_merge(static::getDefaultParams(), $request);
 	}
