@@ -33,7 +33,7 @@ class Bootstrap
 
 		return [
 			'tax_query' => $params
-		]);
+		];
 	}
 
 	protected static function getDefaultParams()
