@@ -16,7 +16,24 @@ class Bootstrap
 		$request = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 		$request = !$request ? [] : array_map('addslashes', $request);
 
-		return array_merge(static::getDefaultParams(), $request);
+		return array_merge(static::getDefaultParams(), $request, static::subquery($request));
+	}
+
+	protected static function subquery($request)
+	{
+		if (empty($request['taxonomy_type']) || (empty($request['taxonomy_field']) && empty($request['taxonomy_terms'])) ) {
+			return [];
+		}
+
+		$params = array_filter([
+			'taxonomy' => $request['taxonomy_type'],
+        	'field'	   => empty($request['taxonomy_field']) ? null : $request['taxonomy_field'],
+        	'terms'    => empty($request['taxonomy_terms']) ? null : $request['taxonomy_terms'],
+        ]);
+
+		return [
+			'tax_query' => $params
+		]);
 	}
 
 	protected static function getDefaultParams()
