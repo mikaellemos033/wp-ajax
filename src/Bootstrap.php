@@ -7,8 +7,11 @@ class Bootstrap
 {
 	public static function run()
 	{
-		$request = static::getParams();
-		return LoadPosts::find($request);
+		$request   = static::getParams();
+		$loadPosts = new LoadPosts($request);
+
+
+		return $loadPosts->run();
 	}
 
 	protected static function getParams()
@@ -26,13 +29,15 @@ class Bootstrap
 		}
 
 		$params = array_filter([
-			'taxonomy' => $request['taxonomy_type'],
-        	'field'	   => empty($request['taxonomy_field']) ? null : $request['taxonomy_field'],
-        	'terms'    => empty($request['taxonomy_terms']) ? null : $request['taxonomy_terms'],
+			'taxonomy' 		   => $request['taxonomy_type'],
+        	'field'	   		   => empty($request['taxonomy_field']) ? null : $request['taxonomy_field'],
+        	'terms'    		   => empty($request['taxonomy_terms']) ? null : $request['taxonomy_terms'],
+        	'include_children' => true,
+        	'operator'		   => 'in'
         ]);
 
 		return [
-			'tax_query' => $params
+			'tax_query' => [ $params ]
 		];
 	}
 
