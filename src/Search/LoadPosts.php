@@ -209,7 +209,7 @@ class LoadPosts
 		if (empty($metas)) return [];
 		global $table_prefix;
 
-		$query = sprintf("SELECT distict(meta_key) FROM %spostmeta where meta_key in (%s) and post_id = %d", $table_prefix, '"' . implode('","', $metas) . '"', $id);
+		$query = sprintf("SELECT distinct(meta_key), meta_value, meta_id FROM %spostmeta where meta_key in (%s) and post_id = %d", $table_prefix, '"' . implode('","', $metas) . '"', $id);
 		$posts = $this->getConnect()->get_results($query);
 
 		if (empty($posts)) return [];
