@@ -24,13 +24,13 @@ class Bootstrap
 
 	protected static function subquery($request)
 	{
-		if (empty($request['taxonomy_type']) || (empty($request['taxonomy_field']) && empty($request['taxonomy_terms'])) ) {
+		if (empty($request['taxonomy_type']) || empty($request['taxonomy_terms'])) {
 			return [];
 		}
 
 		$params = array_filter([
 			'taxonomy' 		   => $request['taxonomy_type'],
-        	'field'	   		   => empty($request['taxonomy_field']) ? null : $request['taxonomy_field'],
+        	'field'	   		   => empty($request['taxonomy_field']) ? 'slug' : $request['taxonomy_field'],
         	'terms'    		   => empty($request['taxonomy_terms']) ? null : $request['taxonomy_terms'],
         	'include_children' => true,
         	'operator'		   => 'in'
